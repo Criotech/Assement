@@ -19,10 +19,16 @@ const People = () => {
     getPeople();
   }, [page]);
 
+  const handleSearch = async (val) => {
+      console.log(val)
+    const response = await ApiInstance.get(`people/?search=${val}`);
+    setPeople(response.data);
+  }
+
   return error ? (
     <div>{error}</div>
   ) : (
-    <PeopleComponent people={people} page={page} setPage={setPage} />
+    <PeopleComponent handleSearch={handleSearch} people={people} page={page} setPage={setPage} />
   );
 };
 
